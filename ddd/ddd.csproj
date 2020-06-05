@@ -138,6 +138,10 @@
     <Compile Include="Migrations\202006041900489_Classes.designer.cs">
       <DependentUpon>202006041900489_Classes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006050717199_SubjectInfo.cs" />
+    <Compile Include="Migrations\202006050717199_SubjectInfo.designer.cs">
+      <DependentUpon>202006050717199_SubjectInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Teacher.cs" />
@@ -210,6 +214,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202006041900489_Classes.resx">
       <DependentUpon>202006041900489_Classes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006050717199_SubjectInfo.resx">
+      <DependentUpon>202006050717199_SubjectInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
