@@ -1,33 +1,64 @@
-﻿@model IEnumerable<ddd.Models.Teacher>
+﻿@using ddd.ViewModels
+@model ddd.ViewModels.IndexViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Teachers</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@Html.Partial("_CreatePartial", Model.CreateTeacherViewModel)
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Name
         </th>
-        <th></th>
+        <th>
+            Subject
+        </th>
+        <th>Options</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Teachers) {
+        <tr data-teacher-id="@item.Id">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.Title)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new {@class="deleteBtn"})*@
+                <button class="deleteBtn">Delete</button>
+            </td>
+        </tr>
+    }
 
 </table>
+
+@section scripts
+{
+    <script>
+        onDeleteHandler = (e) => {
+            if (e.target.classList.contains("deleteBtn")) {
+                var isConfirmed = confirm("Do you really want to delete this very important information");
+                if (!isConfirmed)
+                    e.preventDefault();
+                else
+                {
+                    var parent = e.target.closest("[data-teacher-id]");
+                    var id = parent.dataset.teacherId;
+
+                    window.location.href = '@Url.Action("Delete", "Teachers")/' + id;
+                }
+            }
+        }
+
+        var table = document.querySelector(".table");
+        table.addEventListener("click", onDeleteHandler);
+    </script>
+}

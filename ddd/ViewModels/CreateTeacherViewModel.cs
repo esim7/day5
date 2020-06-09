@@ -6,10 +6,12 @@ using ddd.Models;
 
 namespace ddd.ViewModels
 {
-    public class TeacherViewModel
+    public class CreateTeacherViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public int SubjectId { get; set; }
+
+        public List<Subject> Subjects { get; set; }
     }
 }
